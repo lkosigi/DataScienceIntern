@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Select Intern</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+		<div> Basic Information </div>
+    	<input type="text" name="name1" placeholder="Name"  />
+		<input type="text" name="mobile number" placeholder="Mobile number" />
+		<input type="text" name="ug" placeholder="UG" required="required" />
+		<input type="text" name="ugyear" placeholder="UGyear" required="required" />
+		<input type="text" name="pg" placeholder="PG"  />
+		<input type="text" name="pgyear" placeholder="PGyear" />
+		<br>
+        <div style="margin-top:50px;"> Primary skills self rating </div>
+		<input type="text" name="python" placeholder="Python (1-3)" required="required" />
+		<input type="text" name="r" placeholder="R Programming (1-3)" required="required" />
+		<input type="text" name="ds" placeholder="Data Science (ML/DL)(1-3)" required="required" />
+		<br>
+		<div style="margin-top:50px;"> Additional skills </div>
+		<input type="text" name="ml" placeholder="Machine Learning (0-1)" required="required" />
+		<input type="text" name="dl" placeholder="Deep Learning (0-1)" required="required" />
+		<input type="text" name="nlp" placeholder="NLP (0-1)" required="required" />
+		<input type="text" name="sm" placeholder="Statistical Modeling(0-1)" required="required" />
+		<input type="text" name="aws" placeholder="AWS(0-1)" required="required" />
+		<input type="text" name="sql" placeholder="SQL (0-1)" required="required" />
+		<input type="text" name="nosql" placeholder="NoSQL (0-1)" required="required" />
+		<input type="text" name="xl" placeholder="EXCEL (0-1)" required="required" />
+		<div style="margin-top:50px;">  </div>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
