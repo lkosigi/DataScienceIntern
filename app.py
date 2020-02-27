@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[10]:
-
-
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
@@ -17,57 +11,17 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    ug = request.form.get('ug')
-    ugyear = request.form.get('ugyear')
-    pg = request.form.get('pg')
-    pgyear = request.form.get('pgyear')
-    python = request.form.get('python')
-    r = request.form.get('r')
-    ds = request.form.get('ds')
-    ml = request.form.get('ml')
-    dl = request.form.get('dl')
-    nlp = request.form.get('nlp')
-    sm = request.form.get('sm')
-    aws = request.form.get('aws')
-    sql = request.form.get('sql')
-    nosql = request.form.get('nosql')
-    xl= request.form.get('xl')
-    
-    if ug :
-        type_UG= 1
-    else:
-        type_UG = 0
-    if pg:
-        type_PG= 1
-        year = int(pgyear)
-    else:
-        type_PG = 0
-        year = int(ugyear)
-    if year == 2020:
-        year_encoded = 3
-    elif year == 2019:
-        year_encoded = 2
-    else :
-        year_encoded = 1
-    
-    
-    features = [int(python),int(r),int(ds),type_PG,type_UG,int(ml),int(dl),int(nlp),int(sm),int(aws),int(sql),int(nosql),int(xl),year_encoded]
-    print(features)
-    final_features = [np.array(features)]
+    '''
+    For rendering results on HTML GUI
+    '''
+    int_features = [int(x) for x in request.form.values()]
+    final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
-    
-    return render_template('index.html', prediction_text='Intern is {}'.format(prediction))
 
+    output = round(prediction[0], 2)
 
-# In[ ]:
+    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# In[ ]:
-
-
-
-
